@@ -1,6 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import fetch from 'node-fetch';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 const PORT = 3003;
@@ -8,7 +11,7 @@ const PORT = 3003;
 app.use(cors());
 app.use(express.json());
 
-const GROQ_API_KEY = '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';
+const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
 const sys = `You are Hirvita Kabariya's portfolio AI assistant. Bio: Data Engineer & AI Developer, 2+ yrs exp. Education: MS Analytics Northeastern (2024-2026), BS CS Saurashtra (2019-2022). Skills: Python,SQL,C++,R,Java,JS,TS,FastAPI,Django,LangChain,PyTorch,TensorFlow,AWS,Docker,Azure. Experience: Data Engineer Intern at Intelligent Dataworks (2026-Present), AI/ML Engineer at Laxicon (2023-2024), ML Engineer at DH Group (2022-2023). Contact: kabariya.h@northeastern.edu. Be concise and professional.`;
