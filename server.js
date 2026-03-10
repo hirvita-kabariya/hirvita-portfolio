@@ -20,6 +20,12 @@ app.post('/api/chat', async (req, res) => {
   try {
     const { messages } = req.body;
 
+    // Prepend system message to messages array
+    const allMessages = [
+      { role: 'system', content: sys },
+      ...messages,
+    ];
+
     const response = await fetch(GROQ_API_URL, {
       method: 'POST',
       headers: {
@@ -27,10 +33,9 @@ app.post('/api/chat', async (req, res) => {
         'Authorization': `Bearer ${GROQ_API_KEY}`,
       },
       body: JSON.stringify({
-        model: 'mixtral-8x7b-32768',
+        model: 'llama-3.3-70b-versatile',
         max_tokens: 1000,
-        system: sys,
-        messages: messages,
+        messages: allMessages,
       }),
     });
 
